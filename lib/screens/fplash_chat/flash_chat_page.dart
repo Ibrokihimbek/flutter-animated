@@ -2,32 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animated_example/utils/app_images.dart';
 
-class PageviewPage extends StatefulWidget {
-  const PageviewPage({super.key});
+class FlashChatPage extends StatefulWidget {
+  const FlashChatPage({super.key});
 
   @override
-  State<PageviewPage> createState() => _PageviewPageState();
+  State<FlashChatPage> createState() => _FlashChatPageState();
 }
 
-class _PageviewPageState extends State<PageviewPage> {
+class _FlashChatPageState extends State<FlashChatPage> {
   @override
   Widget build(BuildContext context) {
     timeDilation = 5.0;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Basic Hero Animation'),
+        title: const Text('Flash Chat'),
       ),
       body: Center(
         child: PhotoHero1(
           photo: AppImages.image_lighting,
           width: 40.0,
-          onTap: () {
+          onTap: (word) {
             Navigator.of(context).push(
               MaterialPageRoute<void>(
                 builder: (BuildContext context) {
                   return Scaffold(
                     appBar: AppBar(
-                      title: const Text('Log In'),
+                      title: Text(word == 'Log In' ? 'Log In' : 'Register'),
                     ),
                     body: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -71,12 +71,15 @@ class _PageviewPageState extends State<PageviewPage> {
                             height: 40,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: Colors.blue,
+                              color: word != 'Log In'
+                                  ? const Color(0xFF2521F3)
+                                  : Colors.blue,
                             ),
-                            child: const Center(
+                            child:  Center(
                               child: Text(
-                                'Log In',
-                                style: TextStyle(
+                                word == 'Log In' ?
+                                'Log In' : 'Register',
+                                style: const TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 16,
                                     color: Colors.white),
@@ -139,7 +142,7 @@ class PhotoHero1 extends StatelessWidget {
   }) : super(key: key);
 
   final String photo;
-  final VoidCallback onTap;
+  final ValueChanged<String> onTap;
   final double width;
 
   @override
@@ -157,7 +160,9 @@ class PhotoHero1 extends StatelessWidget {
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: onTap,
+                    onTap: () {
+                      onTap('Flash Chat');
+                    },
                     child: Image.asset(
                       photo,
                       fit: BoxFit.contain,
@@ -179,7 +184,9 @@ class PhotoHero1 extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: InkWell(
-            onTap: onTap,
+            onTap: () {
+              onTap('Log In');
+            },
             child: Container(
               width: double.infinity,
               height: 40,
@@ -199,20 +206,25 @@ class PhotoHero1 extends StatelessWidget {
         const SizedBox(height: 14),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            width: double.infinity,
-            height: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: const Color(0xFF2521F3),
-            ),
-            child: const Center(
-              child: Text(
-                'Register',
-                style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                    color: Colors.white),
+          child: InkWell(
+            onTap: () {
+              onTap('Register');
+            },
+            child: Container(
+              width: double.infinity,
+              height: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: const Color(0xFF2521F3),
+              ),
+              child: const Center(
+                child: Text(
+                  'Register',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                      color: Colors.white),
+                ),
               ),
             ),
           ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_example/screens/car/car_page.dart';
 import 'package:flutter_animated_example/screens/changed_border/changed_border_page.dart';
 import 'package:flutter_animated_example/screens/color_changed/color_changed_page.dart';
-import 'package:flutter_animated_example/screens/page_view/page_view_page.dart';
+import 'package:flutter_animated_example/screens/fplash_chat/flash_chat_page.dart';
 import 'package:flutter_animated_example/screens/positioned_container/positioned_container_page.dart';
 
 import 'changed_size/changed_size.dart';
@@ -19,7 +19,7 @@ abstract class RoutName {
   static const flexible = 'flexible';
   static const indicator = 'indicator';
   static const border = 'border';
-  static const pageView = 'pageView';
+  static const flashChat = 'flashChat';
 }
 
 class AppRoutes {
@@ -41,8 +41,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => IndicatorPage());
       case RoutName.border:
         return MaterialPageRoute(builder: (_) => ChangedBorderPage());
-      case RoutName.pageView:
-        return MaterialPageRoute(builder: (_) => PageviewPage());
+      case RoutName.flashChat:
+        return MaterialPageRoute(builder: (_) => FlashChatPage());
       default:
         return MaterialPageRoute(builder: (_) => Scaffold());
     }

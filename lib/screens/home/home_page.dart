@@ -80,7 +80,7 @@ class HomePage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, RoutName.pageView);
+                  Navigator.pushNamed(context, RoutName.flashChat);
                 },
                 child: const Text(
                   'Page view',
